@@ -1,0 +1,50 @@
+<div class="info" ng-hide="step.editing">
+  <span class="step-id label label-primary">{{step.id}}</span>
+  <span class="step-type label label-default">{{step.type}}</span>
+</div>
+
+<div ng-form="stepForm">
+    <div class="info" ng-show="step.editing">
+    <label>Step ID:</label>
+    <input type="text" ng_model="step.id" value="{{ step.id }}" required/>
+    </div>
+
+    <div ng-include="get_include(step)" class="content">
+    </div>
+
+    <ul class="list-group flow" ng-show="step.editing">
+      <li class="list-group-item list-group-item-success">
+          <label>Then:</label>
+          <select ng-model="step.then_step" required>
+            <option ng-repeat="ostep in steps" ng-if="ostep.id != step.id" value="{{ostep.id}}">{{ostep.id}}</option>
+            <option value="end">end</option>
+          </select>
+      </li>
+      <li class="list-group-item list-group-item-danger">
+        <label>Else:</label>
+        <select ng-model="step.else_step" required>
+          <option ng-repeat="ostep in steps" ng-if="ostep.id != step.id" value="{{ostep.id}}">{{ostep.id}}</option>
+          <option value="end">end</option>
+        </select>
+      </li>
+    </ul>
+
+    <ul class="list-group flow" ng-hide="step.editing">
+      <li class="list-group-item list-group-item-success">
+        <strong>Then:</strong> {{ step.then_step }}
+      </li>
+      <li class="list-group-item list-group-item-danger">
+        <strong>Else:</strong> {{ step.else_step }}
+      </li>
+    </ul>
+
+    <div ng-hide="step.editing" class="btn-group pull-right">
+      <button class="btn btn-info glyphicon glyphicon-edit" ng-click="edit(step)"></button>
+      <button class="btn btn-danger glyphicon glyphicon-trash" ng-click="delete($index)"></button>
+    </div>
+
+    <div ng-show="step.editing" class="btn-group pull-right">
+      <button ng-disabled="!stepForm.$valid" class="btn btn-success glyphicon glyphicon-ok" ng-click="save(step)"></button>
+      <button class="btn btn-default glyphicon glyphicon-remove" ng-click="cancel($index)"></button>
+    </div>
+</div>

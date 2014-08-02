@@ -2,25 +2,49 @@ body {
   font-family: sans;
 }
 
-.questions {
+.steps {
     list-style-type: none;
     padding: 0;
     max-width: 400px;
 }
 
-.question {
+.step {
+  border-left: 3px solid #444;
+  padding-left: 1em;
   margin-bottom: 2em;
 }
 
-.question .info {
-  font-size: .9em;
+.step:after {
+    display: block;
+    content: " ";
+    clear: both;
+}
+
+.step .info {
+  margin-top: 1em;
   height: 2em;
 }
 
-.question .info .question-type {
+.step .info .step-type {
+  font-size: .7em;
   float: right;
 }
 
-.question .flow {
+.step .flow {
   margin-top: 1em;
+  margin-bottom: .5em;
+}
+
+.step .content {
+    margin: 1em 0 1em 0;
+    background-color: #eee;
+    padding: 1em;
+}
+
+.step .content textarea {
+    width: 100%;
+}
+
+.step .content .text {
+    padding: 1em 0 1em 0;
 }

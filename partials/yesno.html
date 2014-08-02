@@ -1,0 +1,14 @@
+<div ng-show="step.editing">
+    <textarea placeholder="Write here your question" ng-model="step.text" required>{{text}}</textarea>
+</div>
+
+<div ng-hide="step.editing">
+    <div class="text">
+        {{step.text}}
+    </div>
+
+    <div class="buttons">
+      <button id="action-yes" class="btn btn-success">Yes</button>
+      <button id="action-no" class="btn btn-danger">No</button>
+    </div>
+</div>

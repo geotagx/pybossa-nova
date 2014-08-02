@@ -1,57 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="bossa-editor">
   <head>
     <meta charset="utf-8">
-    <title>title</title>
+    <title>Editor</title>
     <link rel="stylesheet" href="style.css">
     <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 
     <script src="lib/jquery.js"></script>
     <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="lib/angular.js"></script>
 
-    <script src="lib/underscore.js"></script>
-    <script src="lib/nunjucks.js"></script>
-
-    <script src="types.js"></script>
-    <script src="workflow.js"></script>
-    <script src="editor.js"></script>
+    <script src="controllers.js"></script>
   </head>
-  <body>
+  <body ng-controller="StepEditor">
     <div class="container" id="editor">
-      <!-- <div class="form-group add-box">
-        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">Add <span class="caret"></span></button>
-        <ul id="dropdown" class="dropdown-menu" role="menu" aria-labelledby="add-menu">
-          <li><a href="#" id="add-yesno">Yes/No question</a></li>
-        </ul>
-      </div> -->
       <div class="dropdown">
       <button class="btn btn-default dropdown-toggle" type="button" id="add-menu" data-toggle="dropdown">
         Add <span class="caret"></span>
       </button>
       <ul class="dropdown-menu" role="menu" aria-labelledby="add-menu">
-        <li role="presentation" id="add-yesno"><a role="menuitem" tabindex="-1" href="#">Yes/No question</a></li>
+        <li role="presentation" ng-click="add_step('yesno')"><a role="menuitem" tabindex="-1" href="#">Yes/No question</a></li>
       </ul>
     </div>
-      <ul class="questions">
+    <ul class="steps">
+        <li ng-repeat="step in steps" ng-include="'partials/step.html'" class="step">
+        </li>
       </ul>
     </div>
     <script type="text/javascript">
-      var workflow = Workflow();
 
-      workflow.add_step('step1', {
-        type: 'yesno',
-        text: 'Is there a Pokemon in this picture?',
-        next_step: 'step2'
-      })
-
-      workflow.add_step('step2', {
-        type: 'yesno',
-        text: 'Is it a water Pokemon?',
-        next_step: 'end'
-      })
-
-      var editor = Editor(workflow, $('#editor'));
-      editor.redraw_all();
     </script>
   </body>
 </html>
