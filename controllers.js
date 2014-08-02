@@ -10,10 +10,10 @@ bossa_editor.controller('StepEditor', function ($scope) {
         else_step: 'end'
     }, {
         id: 'step2',
-        type: 'yesno',
-        text: 'Is it a water Pokemon?',
-        then_step: 'end',
-        else_step: 'end'
+        type: 'multiple',
+        text: 'What kind of Pokemon is it?',
+        options: ['Water', 'Earth', 'Fire', 'Stone', 'Chewing Gum'],
+        then_step: 'end'
     }];
 
     $scope.get_include = function(step) {
@@ -44,10 +44,24 @@ bossa_editor.controller('StepEditor', function ($scope) {
     }
 
     $scope.add_step = function(type) {
-        $scope.steps.push({
+        var new_data = {
             editing: true,
             type: type
-        })
+        };
+
+        if (type == 'multiple') {
+            new_data.options = [];
+        }
+
+        $scope.steps.push(new_data);
+    }
+
+    $scope.remove_option = function(step, idx) {
+        step.options.splice(idx, 1);
+    }
+
+    $scope.add_option = function(step, option_text) {
+        step.options.push(option_text);
     }
 
 });

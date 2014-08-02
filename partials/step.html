@@ -20,7 +20,7 @@
             <option value="end">end</option>
           </select>
       </li>
-      <li class="list-group-item list-group-item-danger">
+      <li class="list-group-item list-group-item-danger" ng-if="step.type != 'multiple'">
         <label>Else:</label>
         <select ng-model="step.else_step" required>
           <option ng-repeat="ostep in steps" ng-if="ostep.id != step.id" value="{{ostep.id}}">{{ostep.id}}</option>
@@ -33,7 +33,7 @@
       <li class="list-group-item list-group-item-success">
         <strong>Then:</strong> {{ step.then_step }}
       </li>
-      <li class="list-group-item list-group-item-danger">
+      <li class="list-group-item list-group-item-danger" ng-if="step.type != 'multiple'">
         <strong>Else:</strong> {{ step.else_step }}
       </li>
     </ul>

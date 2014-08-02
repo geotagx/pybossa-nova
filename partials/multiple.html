@@ -1,0 +1,28 @@
+<div ng-show="step.editing">
+  <textarea placeholder="Write here your question" ng-model="step.text" required>{{step.text}}</textarea>
+
+  <div class="buttons btn-group">
+    <button id="action-{{option}}" ng-repeat="option in step.options"
+        class="btn btn-danger" ng-click="remove_option(step, $index)">
+        {{option}} <i class="glyphicon glyphicon-remove-circle"></i>
+    </button>
+  </div>
+  <div class="row">
+    <div class="multiple-add col-md-6 input-group">
+      <input type="text" class="form-control" ng-model="option_text" />
+      <span class="input-group-btn">
+        <button class="btn btn-success" type="button" ng-click="add_option(step, option_text); option_text = ''">Add</button>
+      </span>
+    </div>
+  </div>
+</div>
+
+<div ng-hide="step.editing">
+  <div class="text">
+    {{step.text}}
+  </div>
+
+  <div class="buttons btn-group">
+    <button id="action-{{option}}" ng-repeat="option in step.options" class="btn btn-info">{{option}}</button>
+  </div>
+</div>

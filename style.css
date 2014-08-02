@@ -45,6 +45,10 @@ body {
     width: 100%;
 }
 
+.step .content .multiple-add {
+    margin: 1em;
+}
+
 .step .content .text {
     padding: 1em 0 1em 0;
 }
