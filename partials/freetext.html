@@ -1,0 +1,11 @@
+<div ng-show="step.editing">
+    <textarea placeholder="Write here your question" ng-model="step.text" required>{{text}}</textarea>
+</div>
+
+<div ng-hide="step.editing">
+  <div class="text">
+    {{step.text}}
+  </div>
+  <textarea placeholder="User's answer goes here"></textarea>
+  <button id="action-done" class="btn btn-default">Done</button>
+</div>
