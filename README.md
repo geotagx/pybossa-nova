@@ -6,8 +6,14 @@ geotagx improvements done during the CERN WebFest
 Running
 -------
 
-You won't be able to run this in local mode. You should use a small webserver instead:
+You will need to install the dependencies first
 
 ```bash
-$ python -m SimpleHTTPServer
+$ pip install -r requirements.txt
+```
+
+Then, you can run the dev server using:
+
+```bash
+$ python manage.py runserver
 ```

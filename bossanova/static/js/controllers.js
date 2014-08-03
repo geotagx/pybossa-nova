@@ -17,7 +17,7 @@ bossa_editor.controller('StepEditor', function ($scope) {
     }];
 
     $scope.get_include = function(step) {
-        return 'partials/' + step.type + '.html';
+        return 'static/partials/' + step.type + '.html';
     }
 
     $scope.save = function(step) {

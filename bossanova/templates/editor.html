@@ -3,14 +3,14 @@
   <head>
     <meta charset="utf-8">
     <title>PyBOSSA Project generator</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="{{ url_for('static', filename='lib/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" media="screen">
 
-    <script src="lib/jquery.js"></script>
-    <script src="lib/bootstrap/js/bootstrap.min.js"></script>
-    <script src="lib/angular.js"></script>
+    <script src="{{ url_for('static', filename='lib/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/angular.js') }}"></script>
 
-    <script src="controllers.js"></script>
+    <script src="{{ url_for('static', filename='js/controllers.js') }}"></script>
   </head>
   <body>
     <div class="navbar navbar-static-top navbar-inverse">
@@ -51,7 +51,7 @@
         </div>
 
         <ul class="steps">
-            <li ng-repeat="step in steps" ng-include="'partials/step.html'" class="step">
+            <li ng-repeat="step in steps" ng-include="'static/partials/step.html'" class="step">
             </li>
         </ul>
       </div>
@@ -70,7 +70,7 @@
           </form>
         </div>
         <div class="steps row">
-          <div ng-repeat="task in tasks" ng-include="'partials/task.html'" class="col-xs-6 col-md-3 task ">
+          <div ng-repeat="task in tasks" ng-include="'static/partials/task.html'" class="col-xs-6 col-md-3 task ">
           </a>
         </div>
       </div>
