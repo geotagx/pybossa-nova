@@ -12,24 +12,50 @@
 
     <script src="controllers.js"></script>
   </head>
-  <body ng-controller="StepEditor">
-    <div class="container" id="editor">
-      <div class="dropdown">
-      <button class="btn btn-default dropdown-toggle" type="button" id="add-menu" data-toggle="dropdown">
-        Add <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu" role="menu" aria-labelledby="add-menu">
-        <li role="presentation" ng-click="add_step('yesno')"><a role="menuitem" tabindex="-1" href="#">Yes/No question</a></li>
-        <li role="presentation" ng-click="add_step('multiple')"><a role="menuitem" tabindex="-1" href="#">Multiple answer question</a></li>
-      </ul>
-    </div>
-    <ul class="steps">
-        <li ng-repeat="step in steps" ng-include="'partials/step.html'" class="step">
-        </li>
-      </ul>
-    </div>
-    <script type="text/javascript">
+  <body>
+    <div class="row container">
+      <div class="col-md-6" ng-controller="StepEditor">
 
-    </script>
+        <div class="navbar navbar-default container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Step Editor</a>
+          </div>
+          <form class="navbar-form navbar-left">
+            <div class="dropdown">
+              <button class="btn btn-default dropdown-toggle" type="button" id="add-menu" data-toggle="dropdown">
+                Add <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="add-menu">
+                <li role="presentation" ng-click="add_step('yesno')"><a role="menuitem" tabindex="-1" href="#">Yes/No question</a></li>
+                <li role="presentation" ng-click="add_step('multiple')"><a role="menuitem" tabindex="-1" href="#">Multiple answer question</a></li>
+              </ul>
+            </div>
+          </form>
+        </div>
+
+        <ul class="dropdown-menu" role="menu" aria-labelledby="add-menu">
+          <li role="presentation" ng-click="add_step('yesno')"><a role="menuitem" tabindex="-1" href="#">Yes/No question</a></li>
+          <li role="presentation" ng-click="add_step('multiple')"><a role="menuitem" tabindex="-1" href="#">Multiple answer question</a></li>
+        </ul>
+        <ul class="steps">
+            <li ng-repeat="step in steps" ng-include="'partials/step.html'" class="step">
+            </li>
+        </ul>
+      </div>
+      <div class="col-md-6" ng-controller="TaskEditor">
+        <div class="navbar navbar-default container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Task Editor</a>
+          </div>
+          <form class="navbar-form navbar-left">
+            <div class="dropdown">
+              <button class="btn btn-default" type="button" id="add-menu">
+                Add Task
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

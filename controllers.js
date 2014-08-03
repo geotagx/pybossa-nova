@@ -65,3 +65,6 @@ bossa_editor.controller('StepEditor', function ($scope) {
     }
 
 });
+
+bossa_editor.controller('TaskEditor', function ($scope) {
+});
