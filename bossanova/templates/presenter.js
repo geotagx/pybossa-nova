@@ -89,23 +89,26 @@ function show_step(task_id, answer, step_id, deferred) {
       } else {
         show_step(task_id, answer, step.else_step, deferred);
       }
-
+      answer[step_id] = $(this).val();
     })
 
   } else if (step.type == 'multiple') {
       $('#answer .multiple').html('');
       for (i in step.options) {
         var option = step.options[i];
-        $('#answer .multiple').append($('<button class="btn btn-info btn-answer"/>').text(option).data('option', option));
+        $('#answer .multiple').append($('<button class="btn btn-info btn-answer"/>')
+            .text(option).val(option));
       }
 
       $('#answer .multiple .btn-answer').off('click').click(function() {
+        answer[step_id] = $(this).val();
         show_step(task_id, answer, step.then_step, deferred);
       })
   } else if (step.type == 'freetext') {
     $('#answer .freetext textarea').html('');
 
     $('#answer .freetext .btn-answer').off('click').click(function() {
+      answer[step_id] = $(this).siblings('textarea').val();
       show_step(task_id, answer, step.then_step, deferred);
     })
   }
