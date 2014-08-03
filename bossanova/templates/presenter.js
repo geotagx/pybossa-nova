@@ -115,9 +115,6 @@ function show_step(task_id, answer, step_id, deferred) {
 }
 
 function clearPreviousTask() {
-    $('.animal').each(function() {
-        $(this).remove();
-    });
     $('#inputName').val('');
     $('#inputNumber').val(0);
 }

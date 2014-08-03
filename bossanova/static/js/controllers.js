@@ -12,6 +12,15 @@ bossa_editor.controller('StepEditor', function ($scope, Steps) {
 
     $scope.steps = Steps;
 
+    // TODO: Better solution? $includeContentLoaded is called MANY times
+    $scope.$on('$includeContentLoaded', function(event) {
+      $('#send-server').off('hidden.bs.modal').on('hidden.bs.modal', function () {
+        $(this).find('.message-success').hide();
+        $(this).find('.btn-success').removeAttr('disabled');
+        $(this).removeData();
+      })
+    });
+
     $scope.get_include = function(step) {
         return 'static/partials/' + step.type + '.html';
     }
