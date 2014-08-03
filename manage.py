@@ -1,5 +1,4 @@
 from flask.ext.script import Manager
-
 from bossanova import app
 
 manager = Manager(app)

@@ -18,13 +18,17 @@
         <div class="navbar-header">
           <a class="navbar-brand" href="#">PyBOSSA Project generator</a>
         </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" ng-controller="DataManager">
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <a class="" href="#" id="project-menu">
+              <a class="dropdown-toggle" href="#" id="project-menu" data-toggle="dropdown">
                 <i class="glyphicon glyphicon-cog"></i>
                 <span class="caret"></span>
               </a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="project-menu">
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="download_json()">Download JSON</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#send-server">Send to server</a></li>
+              </ul>
             </li>
           </ul>
         </div>
@@ -75,5 +79,9 @@
         </div>
       </div>
     </div>
+
+    <div class="modal fade" id="send-server" ng-include="'static/partials/send_modal.html'">
+    </div>
+
   </body>
 </html>

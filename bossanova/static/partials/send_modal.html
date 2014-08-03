@@ -1,0 +1,26 @@
+<div class="modal-dialog" ng-controller="SendModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <h4 class="modal-title">Send Project to PyBOSSA server</h4>
+    </div>
+    <div class="modal-body">
+      <div class="input-group">
+        <span class="input-group-addon">Server URL</span>
+        <input type="text" class="form-control" ng-model="server_url" placeholder="http://example.org" />
+      </div>
+      <div class="input-group" style="margin-top: 1em;">
+        <span class="input-group-addon">API key</span>
+        <input type="text" class="form-control" ng-model="api_key" placeholder="xxxxxxxx" required />
+      </div>
+      <div class="input-group" style="margin-top: 1em;">
+        <span class="input-group-addon">Project Name</span>
+        <input type="text" class="form-control" ng-model="project_name" placeholder="test" required />
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <button type="button" class="btn btn-success" ng-click="send_to_server()">Send</button>
+    </div>
+  </div>
+</div>
