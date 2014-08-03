@@ -146,7 +146,8 @@ bossa_editor.controller('SendModal', function ($scope, Steps, Tasks) {
             }),
             contentType: 'application/json'
     }).done(function() {
-      console.log('DONE!')
+      $('#send-server .message-success').show();
+      $('#send-server .btn-success').attr('disabled', 'disabled')
     });
   }
 });
