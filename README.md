@@ -1,7 +1,8 @@
-geotagx-webfest
+pybossa-nova
 ===============
 
-geotagx improvements done during the CERN WebFest
+A PyBossa project generator.
+
 
 Running
 -------
