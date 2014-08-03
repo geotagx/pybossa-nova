@@ -67,4 +67,24 @@ bossa_editor.controller('StepEditor', function ($scope) {
 });
 
 bossa_editor.controller('TaskEditor', function ($scope) {
+  $scope.tasks = [
+    {
+      url: 'https://pbs.twimg.com/profile_images/378800000822867536/3f5a00acf72df93528b6bb7cd0a4fd0c.jpeg'
+    },
+    {
+      url: 'http://img.gawkerassets.com/img/193m8hvco32j0jpg/original.jpg'
+    }
+  ];
+
+  $scope.add_task = function(url) {
+      var new_data = {
+        url: url
+      };
+
+      $scope.tasks.push(new_data);
+  }
+
+  $scope.remove_task = function(idx) {
+      $scope.tasks.splice(idx, 1);
+  }
 });

@@ -51,3 +51,14 @@ body {
 .step .content .text {
     padding: 1em 0 1em 0;
 }
+
+.container {
+  margin-top: 1em;
+}
+
+.thumbnail-remove {
+  position: absolute;
+  clear: none;
+  bottom: 10px;
+  right: 10px;
+}

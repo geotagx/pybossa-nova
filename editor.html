@@ -13,14 +13,30 @@
     <script src="controllers.js"></script>
   </head>
   <body>
+    <div class="navbar navbar-static-top navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">PyBOSSA Project generator</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a class="" href="#" id="project-menu">
+                <i class="glyphicon glyphicon-cog"></i>
+                <span class="caret"></span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
     <div class="row container">
       <div class="col-md-6" ng-controller="StepEditor">
-
         <div class="navbar navbar-default container-fluid">
           <div class="navbar-header">
             <a class="navbar-brand" href="#">Step Editor</a>
           </div>
-          <form class="navbar-form navbar-left">
+          <form class="navbar-form navbar-right">
             <div class="dropdown">
               <button class="btn btn-default dropdown-toggle" type="button" id="add-menu" data-toggle="dropdown">
                 Add <span class="caret"></span>
@@ -47,13 +63,18 @@
           <div class="navbar-header">
             <a class="navbar-brand" href="#">Task Editor</a>
           </div>
-          <form class="navbar-form navbar-left">
-            <div class="dropdown">
-              <button class="btn btn-default" type="button" id="add-menu">
-                Add Task
-              </button>
+          <form class="navbar-form navbar-right">
+            <div class="multiple-add input-group">
+              <input type="text" placeholder="http://...." class="form-control" ng-model="task_url" />
+              <span class="input-group-btn">
+                <button class="btn btn-success" type="button" ng-click="add_task(task_url); task_url = ''">Add Task</button>
+              </span>
             </div>
           </form>
+        </div>
+        <div class="steps row">
+          <div ng-repeat="task in tasks" ng-include="'partials/task.html'" class="col-xs-6 col-md-3 task ">
+          </a>
         </div>
       </div>
     </div>
