@@ -102,6 +102,12 @@ function show_step(task_id, answer, step_id, deferred) {
       $('#answer .multiple .btn-answer').off('click').click(function() {
         show_step(task_id, answer, step.then_step, deferred);
       })
+  } else if (step.type == 'freetext') {
+    $('#answer .freetext textarea').html('');
+
+    $('#answer .freetext .btn-answer').off('click').click(function() {
+      show_step(task_id, answer, step.then_step, deferred);
+    })
   }
 }
 
