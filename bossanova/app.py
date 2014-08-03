@@ -27,8 +27,10 @@ def send_data():
     app = pbclient.find_app(short_name=project_name)[0]
     app.info['task_presenter'] = tpl_presenter
 
+    for task in pbclient.find_tasks(app.id):
+        pbclient.delete_task(task.id)
+
     for task in data['tasks']:
-        print(task)
         pbclient.create_task(app.id, task)
 
     pbclient.update_app(app)

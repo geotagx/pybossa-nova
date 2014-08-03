@@ -1,30 +1,11 @@
 var bossa_editor = angular.module('bossa-editor', []);
 
 bossa_editor.factory('Steps', function() {
-  return [{
-      id: 'step1',
-      type: 'yesno',
-      text: 'Is there a Pokemon in this picture?',
-      then_step: 'step2',
-      else_step: 'end'
-  }, {
-      id: 'step2',
-      type: 'multiple',
-      text: 'What kind of Pokemon is it?',
-      options: ['Water', 'Earth', 'Fire', 'Stone', 'Chewing Gum'],
-      then_step: 'end'
-  }]
+  return TEMPLATES.animals.steps;
 })
 
 bossa_editor.factory('Tasks', function() {
-  return [
-    {
-      img_url: 'https://pbs.twimg.com/profile_images/378800000822867536/3f5a00acf72df93528b6bb7cd0a4fd0c.jpeg'
-    },
-    {
-      img_url: 'http://img.gawkerassets.com/img/193m8hvco32j0jpg/original.jpg'
-    }
-  ];
+  return TEMPLATES.animals.tasks;
 });
 
 bossa_editor.controller('StepEditor', function ($scope, Steps) {
@@ -136,6 +117,8 @@ bossa_editor.controller('SendModal', function ($scope, Steps, Tasks) {
       tasks: remove_angular_vars(Tasks)
     }
 
+    $('#send-server .btn-success').attr('disabled', 'disabled')
+
     $.ajax('/send-data/', {
             type: 'PUT',
             data: JSON.stringify({
@@ -147,7 +130,6 @@ bossa_editor.controller('SendModal', function ($scope, Steps, Tasks) {
             contentType: 'application/json'
     }).done(function() {
       $('#send-server .message-success').show();
-      $('#send-server .btn-success').attr('disabled', 'disabled')
     });
   }
 });
