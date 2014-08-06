@@ -1,0 +1,20 @@
+---
+title: "Pokemon"
+steps:
+  - id: is_pokemon
+    type: yesno
+    text: Is there a Pokemon in this picture?
+    then_step: kind
+    else_step: end
+  - id: kind
+    type: multiple
+    text: What kind of Pokemon is it?
+    options:
+      - Water
+      - Earth
+      - Fire
+      - Stone
+    then_step: end
+tasks:
+  - img_url: https://pbs.twimg.com/profile_images/378800000822867536/3f5a00acf72df93528b6bb7cd0a4fd0c.jpeg
+  - img_url: http://img.gawkerassets.com/img/193m8hvco32j0jpg/original.jpg

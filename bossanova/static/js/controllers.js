@@ -1,16 +1,45 @@
 var bossa_editor = angular.module('bossa-editor', []);
 
-bossa_editor.factory('Steps', function() {
-  return TEMPLATES.animals.steps;
-});
+function getter_setter(etype) {
+  return function ($rootScope) {
+    var storage = function() {
+      var list = [];
 
-bossa_editor.factory('Tasks', function() {
-  return TEMPLATES.animals.tasks;
-});
+      this.get = function(idx) {
+        if (idx === undefined) {
+          return list;
+        } else {
+          return list[idx];
+        }
+      };
+      this.set = function(arg, val) {
+        if (val === undefined) {
+          list = arg;
+        } else {
+          list[arg] = val;
+        }
 
-bossa_editor.controller('StepEditor', function ($scope, Steps) {
+        $rootScope.$broadcast(etype + '-set');
+      };
+      this.push = list.push;
+      this.splice = list.splice;
+    };
 
-    $scope.steps = Steps;
+    return new storage();
+  };
+};
+
+bossa_editor.factory('steps', ['$rootScope', getter_setter('step')]);
+bossa_editor.factory('tasks', ['$rootScope', getter_setter('task')]);
+
+bossa_editor.controller('StepEditor', function ($scope, steps) {
+
+    $scope.steps = steps.get();
+
+    $scope.$on('step-set', function() {
+      $scope.steps = steps.get();
+      $scope.$apply();
+    })
 
     // TODO: Better solution? $includeContentLoaded is called MANY times
     $scope.$on('$includeContentLoaded', function(event) {
@@ -27,7 +56,6 @@ bossa_editor.controller('StepEditor', function ($scope, Steps) {
 
     $scope.save = function(step) {
         step.editing = false;
-        //$scope.apply();
     };
 
     $scope.edit = function(step) {
@@ -36,9 +64,9 @@ bossa_editor.controller('StepEditor', function ($scope, Steps) {
     };
 
     $scope.cancel = function(idx) {
-        var old_step = $scope.steps[idx].old_step;
+        var old_step = steps.get(idx).old_step;
         if (old_step) {
-            $scope.steps[idx] = $scope.steps[idx].old_step;
+            steps.set(idx, old_step);
         } else {
             $scope.delete(idx);
         }
@@ -71,9 +99,14 @@ bossa_editor.controller('StepEditor', function ($scope, Steps) {
 
 });
 
-bossa_editor.controller('TaskEditor', function ($scope, Tasks) {
+bossa_editor.controller('TaskEditor', function ($scope, tasks) {
 
-  $scope.tasks = Tasks;
+  $scope.tasks = tasks.get();
+
+  $scope.$on('task-set', function() {
+    $scope.tasks = tasks.get();
+    $scope.$apply();
+  })
 
   $scope.add_task = function(url) {
       var new_data = {
@@ -103,27 +136,33 @@ function remove_angular_vars(data) {
   });
 }
 
-bossa_editor.controller('DataManager', function ($scope, Steps, Tasks) {
+bossa_editor.controller('DataManager', function ($scope, steps, tasks) {
   $scope.download_json = function() {
 
     var data = {
-      steps: remove_angular_vars(Steps),
-      tasks: remove_angular_vars(Tasks)
+      steps: remove_angular_vars(steps.get()),
+      tasks: remove_angular_vars(tasks.get())
     };
 
     window.open("data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data)));
 
     return data;
   };
+
+  $scope.load_template = function(tpl_name) {
+    $.get('/templates/' + tpl_name).done(function(result) {
+      steps.set(result.steps);
+      tasks.set(result.tasks);
+    })
+  };
 });
 
-
-bossa_editor.controller('SendModal', function ($scope, Steps, Tasks) {
+bossa_editor.controller('SendModal', function ($scope, steps, tasks) {
 
   $scope.send_to_server = function() {
     var data = {
-      steps: remove_angular_vars(Steps),
-      tasks: remove_angular_vars(Tasks)
+      steps: remove_angular_vars(steps.get()),
+      tasks: remove_angular_vars(tasks.get())
     };
 
     $('#send-server .btn-success').attr('disabled', 'disabled');

@@ -1,0 +1,53 @@
+---
+title: Animals
+steps:
+  - id: spam
+    type: yesno
+    text: Is this photo spam?
+    then_step: end
+    else_step: see_animals
+  - id: see_animals
+    type: yesno
+    text: Do you see animals in the photo?
+    then_step: animal_type
+    else_step: end
+  - id: animal_type
+    type: multiple
+    text: What is the animal you are looking at?
+    options:
+      - Cattle
+      - Sheep
+      - Donkey
+      - Pigs
+      - Poultry
+      - Oxen
+      - I don't know
+    then_step: animal_alive
+  - id: animal_alive
+    type: yesno
+    text: Is the animal alive?
+    then_step: step5
+    else_step: animal_good_health
+  - id: animal_good_health
+    type: multiple
+    text: 'Indicators of good health:'
+    options:
+      - Running
+      - Eating
+      - Playing
+      - Moving
+      - I can't tell
+    then_step: animal_bad_health
+  - id: animal_bad_health
+    type: multiple
+    text: 'Indicators of bad health:'
+    options:
+      - Looks skinny
+      - Lying down
+      - The animal's fur is lank
+      - I can see the animal's ribs
+      - I can't tell
+    then_step: end
+tasks:
+  - img_url: http://annesentours.net/wp-content/gallery/angola/dynamic/iona-zebra-nggid03795-ngg0dyn-320x240x100-00f0w010c010r110f110r010t010.jpg
+  - img_url: http://static3.businessinsider.com/image/5238c9c5ecad047f12b2751a/internet-famous-grumpy-cat-just-landed-an-endorsement-deal-with-friskies.jpg

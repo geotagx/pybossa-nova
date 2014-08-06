@@ -1,12 +1,40 @@
-from flask import Flask, render_template, request
+import os
+import glob
+import yaml
+
+from flask import Flask, render_template, request, jsonify
+
 import pbclient
 
+
+def get_project_templates():
+    tpls = {}
+
+    for fname in glob.glob(os.path.join(os.path.dirname(__file__), 'project_tpls', '*.yaml')):
+        with open(fname, 'r') as f:
+            name = os.path.basename(fname)[:-5]
+            data = yaml.load(f)
+            tpls[name] = data
+
+    return tpls
+
 app = Flask(__name__)
+templates = get_project_templates()
 
 
 @app.route("/")
 def index():
-    return render_template('editor.html')
+    return render_template('editor.html', templates=templates)
+
+
+@app.route("/templates/<name>/", methods=["GET"])
+def get_templates(name):
+    tpl_content = templates.get(name)
+
+    if tpl_content is None:
+        return 'No such template found', 404
+
+    return jsonify(tpl_content)
 
 
 @app.route("/send-data/", methods=["PUT"])
