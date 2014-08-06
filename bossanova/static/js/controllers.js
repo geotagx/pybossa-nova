@@ -2,7 +2,7 @@ var bossa_editor = angular.module('bossa-editor', []);
 
 bossa_editor.factory('Steps', function() {
   return TEMPLATES.animals.steps;
-})
+});
 
 bossa_editor.factory('Tasks', function() {
   return TEMPLATES.animals.tasks;
@@ -18,22 +18,22 @@ bossa_editor.controller('StepEditor', function ($scope, Steps) {
         $(this).find('.message-success').hide();
         $(this).find('.btn-success').removeAttr('disabled');
         $(this).removeData();
-      })
+      });
     });
 
     $scope.get_include = function(step) {
         return 'static/partials/' + step.type + '.html';
-    }
+    };
 
     $scope.save = function(step) {
         step.editing = false;
         //$scope.apply();
-    }
+    };
 
     $scope.edit = function(step) {
         step.old_step = angular.extend({}, step);
         step.editing = true;
-    }
+    };
 
     $scope.cancel = function(idx) {
         var old_step = $scope.steps[idx].old_step;
@@ -42,11 +42,11 @@ bossa_editor.controller('StepEditor', function ($scope, Steps) {
         } else {
             $scope.delete(idx);
         }
-    }
+    };
 
     $scope.delete = function(idx) {
         $scope.steps.splice(idx, 1);
-    }
+    };
 
     $scope.add_step = function(type) {
         var new_data = {
@@ -59,15 +59,15 @@ bossa_editor.controller('StepEditor', function ($scope, Steps) {
         }
 
         $scope.steps.push(new_data);
-    }
+    };
 
     $scope.remove_option = function(step, idx) {
         step.options.splice(idx, 1);
-    }
+    };
 
     $scope.add_option = function(step, option_text) {
         step.options.push(option_text);
-    }
+    };
 
 });
 
@@ -81,11 +81,11 @@ bossa_editor.controller('TaskEditor', function ($scope, Tasks) {
       };
 
       $scope.tasks.push(new_data);
-  }
+  };
 
   $scope.remove_task = function(idx) {
       $scope.tasks.splice(idx, 1);
-  }
+  };
 });
 
 function remove_angular_vars(data) {
@@ -100,7 +100,7 @@ function remove_angular_vars(data) {
     });
 
     return ret;
-  })
+  });
 }
 
 bossa_editor.controller('DataManager', function ($scope, Steps, Tasks) {
@@ -109,12 +109,12 @@ bossa_editor.controller('DataManager', function ($scope, Steps, Tasks) {
     var data = {
       steps: remove_angular_vars(Steps),
       tasks: remove_angular_vars(Tasks)
-    }
+    };
 
-    window.open("data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data)))
+    window.open("data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data)));
 
     return data;
-  }
+  };
 });
 
 
@@ -124,9 +124,9 @@ bossa_editor.controller('SendModal', function ($scope, Steps, Tasks) {
     var data = {
       steps: remove_angular_vars(Steps),
       tasks: remove_angular_vars(Tasks)
-    }
+    };
 
-    $('#send-server .btn-success').attr('disabled', 'disabled')
+    $('#send-server .btn-success').attr('disabled', 'disabled');
 
     $.ajax('/send-data/', {
             type: 'PUT',
@@ -140,5 +140,5 @@ bossa_editor.controller('SendModal', function ($scope, Steps, Tasks) {
     }).done(function() {
       $('#send-server .message-success').show();
     });
-  }
+  };
 });
