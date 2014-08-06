@@ -1,0 +1,67 @@
+---
+title: Crops
+steps:
+  - id: spam
+    type: yesno
+    text: Is this photo spam?
+    then_step: crops_present
+    else_step: end
+  - id: crops_present
+    type: yesno
+    text: Are there crops in the photo?
+    then_step: method
+    else_step: end
+  - id: method
+    type: multiple
+    text: Can you see the method of cultivation?
+    options:
+      - Manual cultivation
+      - With animals
+      - By machine
+      - I don't know
+    then_step: species
+  - id: species
+    type: multiple
+    text: What species of crop are you seeing?
+    options:
+      - Cassava
+      - Banana
+      - Maize (Corn)
+      - Potato
+      - Millet
+      - Sweet potato
+      - Other
+    then_step: crops_green
+  - id: crops_green
+    type: yesno
+    text: Are the crops green?
+    then_step: wilting
+    else_step: vegetation_field
+  - id: wilting
+    type: yesno
+    text: Do the plants seem to be wilting? Or their leaves rolling?
+    then_step: vegetation_field
+    else_step: end
+  - id: vegetation_field
+    type: yesno
+    text: Do you see any green vegetation in the field?
+    then_step: vegetation_edges
+    else_step: end
+  - id: vegetation_edges
+    type: yesno
+    text: Is the vegetation around the edges of the field green?
+    then_step: crop_harvested
+    else_step: end
+  - id: crop_harvested
+    type: yesno
+    text: Does the crop look like it has been harvested?
+    then_step: plants_missing
+    else_step: end
+  - id: plants_missing
+    type: yesno
+    text: Are there any plants missing from the rows?
+    then_step: end
+    else_step: end
+tasks:
+  - img_url: http://4.bp.blogspot.com/-ToY9ceuV6wQ/TmQthnyfkXI/AAAAAAAAFfs/hTVZ-1jEZ_g/s400/africadrought.jpg
+  - img_url: http://www.nextgencassava.org/img/resources/field-scientist-woman-farmer.jpg

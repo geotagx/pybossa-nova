@@ -26,8 +26,8 @@ steps:
   - id: animal_alive
     type: yesno
     text: Is the animal alive?
-    then_step: step5
-    else_step: animal_good_health
+    then_step: animal_good_health
+    else_step: end
   - id: animal_good_health
     type: multiple
     text: 'Indicators of good health:'

@@ -1,0 +1,37 @@
+---
+title: Children
+steps:
+  - id: spam
+    type: yesno
+    text: Is this photo spam?
+    then_step: end
+    else_step: any_children
+  - id: any_children
+    type: yesno
+    text: Do you see any children in this photo?
+    then_step: any_shelter
+    else_step: end
+  - id: any_shelter
+    type: yesno
+    text: Do you see any shelter in this photo?
+    then_step: shelter_adequate
+    else_step: end
+  - id: shelter_adequate
+    type: multiple
+    text: On a scale of 1 to 5, how adequate is the shelter for protecting a child from the weather?
+    options:
+      - 2
+      - 1
+      - 3
+      - 4
+      - 5
+      - I cannot tell
+    then_step: part_village
+  - id: part_village
+    type: yesno
+    text: Does the shelter appear to be part of a village or near other structures?
+    then_step: end
+    else_step: end
+tasks:
+  - img_url: https://farm3.staticflickr.com/2933/14388396346_de506bba9a_b.jpg
+  - img_url: https://farm6.staticflickr.com/5579/14224926110_a63f1a2429_b.jpg
