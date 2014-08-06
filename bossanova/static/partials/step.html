@@ -16,14 +16,16 @@
       <li class="list-group-item list-group-item-success">
           <label>Then:</label>
           <select ng-model="step.then_step" required>
-            <option ng-repeat="ostep in steps" ng-if="ostep.id != step.id" value="{{ostep.id}}">{{ostep.id}}</option>
+            <option ng-repeat="ostep in steps" ng-if="ostep.id != step.id" value="{{ostep.id}}"
+              ng-selected="step.then_step == ostep.id">{{ostep.id}}</option>
             <option value="end">end</option>
           </select>
       </li>
       <li class="list-group-item list-group-item-danger" ng-if="step.type != 'multiple' && step.type !='freetext'">
         <label>Else:</label>
         <select ng-model="step.else_step" required>
-          <option ng-repeat="ostep in steps" ng-if="ostep.id != step.id" value="{{ostep.id}}">{{ostep.id}}</option>
+          <option ng-repeat="ostep in steps" ng-if="ostep.id != step.id" value="{{ostep.id}}"
+            ng-selected="step.else_step == ostep.id">{{ostep.id}}</option>
           <option value="end">end</option>
         </select>
       </li>
